@@ -91,7 +91,7 @@ input {
 
     touchpad {
         tap
-        natural-scroll
+        // natural-scroll
     }
 }
 
