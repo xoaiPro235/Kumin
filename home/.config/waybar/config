@@ -12,7 +12,7 @@
 
   "modules-left": ["niri/window"],
   "modules-center": ["clock"],
-  "modules-right": ["custom/weather", "backlight", "pulseaudio", "battery", "tray"],
+  "modules-right": ["custom/weather", "backlight", "pulseaudio", "battery", "network", "", "tray"],
 
   "niri/window": {
     "format": "{title}  ",
@@ -48,6 +48,28 @@
     "on-scroll-down": "brightnessctl set 5%-"
   },
 
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "",
+    "format-off": "",
+    "format-on": "󰂱",
+    "format-connected": "󰂱 {device_alias}",
+    "format-connected-battery": "󰂱 {device_alias} {device_battery_percentage}%",
+    "tooltip-format": "{controller_alias}\t{num_connections} connected",
+	  "tooltip-format-connected": "{controller_alias}\n\n{num_connections} connected\n\n{device_enumerate}",
+	  "tooltip-format-enumerate-connected": "{device_alias}",
+	  "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_battery_percentage}%",
+    "on-click-right": "foot -e bluetuith"
+  },
+
+  "network": {
+    "format-wifi": "",
+    "format-disconnected": "",
+    "tooltip-format-wifi": " {essid} ({signalStrength}%)",
+    "tooltip-format-disconnected": " Disconnected",
+    "on-click-right": "foot -e nmtui"
+  },
+
   "custom/weather": {
     "format": " 󰖐 {} ",
     "exec": "curl -s 'wttr.in/?format=%t' 2>/dev/null",
@@ -55,7 +77,9 @@
   },
 
   "pulseaudio": {
-    "format": "  {volume}% ",
+    "format": " {icon} {volume}% ",
+    "format-muted": "",
+    "format-icons": ["", ""],
     "on-click": "pavucontrol"
   },
 
