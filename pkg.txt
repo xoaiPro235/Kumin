@@ -56,6 +56,5 @@ neovim
 tmux
 wlsunset
 xdg-desktop-portal-gnome
-firefox-pure
 wl-screenrec-git
 sway-audio-idle-inhibit-git
