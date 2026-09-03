@@ -89,6 +89,10 @@ input {
         numlock
     }
 
+    touch {
+        off
+    }
+
     touchpad {
         tap
         // natural-scroll
