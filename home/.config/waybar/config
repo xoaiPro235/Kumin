@@ -12,7 +12,7 @@
 
   "modules-left": ["niri/window"],
   "modules-center": ["clock"],
-  "modules-right": ["custom/weather", "backlight", "pulseaudio", "battery", "network", "", "tray"],
+  "modules-right": ["custom/weather", "backlight", "pulseaudio", "battery", "network", "bluetooth", "tray"],
 
   "niri/window": {
     "format": "{title}  ",
