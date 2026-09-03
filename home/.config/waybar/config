@@ -35,7 +35,9 @@
     "format-charging": "󰂄 {capacity}%",
     "format-plugged": "󰚥 {capacity}%",
     "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-    "tooltip": true
+    "tooltip": true,
+    "tooltip-format": "{capacity}% - {time}\nClick to change power profile",
+    "on-click": "~/.local/bin/powerprofiles.sh"
   },
 
   "backlight": {
