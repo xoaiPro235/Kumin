@@ -1,11 +1,20 @@
 #!/bin/sh
 set -eu
 
+
+current=$(powerprofilesctl get)
+
 option_perf="󰓅  Performance"
 option_bal="󰾆  Balanced"
 option_save="  Power-saver"
 
-chosen=$(printf '%s\n' "$option_perf" "$option_bal" "$option_save" | rofi -dmenu -i -p "Power Profile")
+case "$current" in
+    performance) option_perf="$option_perf  ●" ;;
+    balanced)    option_bal="$option_bal  ●" ;;
+    power-saver) option_save="$option_save  ●" ;;
+esac
+
+chosen=$(printf '%s\n' "$option_perf" "$option_bal" "$option_save" | rofi -dmenu -i -p "Power Profile ($current)")
 
 case "$chosen" in
     "$option_perf")
