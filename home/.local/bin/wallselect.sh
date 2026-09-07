@@ -29,19 +29,8 @@ if [ -n "$CHOICE" ]; then
     set_wallpaper "$WALL"
     printf '%s' "$WALL" > "$HOME/.local/state/kumin_theme/wallpaper"
 
-    ACCENT=$(
-        python3 -c '
-from colorthief import ColorThief
-import sys
-
-colors = ColorThief(sys.argv[1]).get_palette(color_count=5)
-brightest = max(colors, key=lambda c: sum(v*v for v in c))
-if sum(brightest) < 180:
-    print("#ffffff")
-else:
-    print("#%02x%02x%02x" % tuple(brightest))
-' "$WALL"
-    )
+    ACCENT=$(matugen image "$WALL" -m dark --prefer saturation --json hex 2>/dev/null | jq -r '.colors.primary.dark.color // empty')
+    ACCENT="${ACCENT:-#ffffff}"
 
     ~/.local/bin/kumin-style.sh "$ACCENT"
 fi

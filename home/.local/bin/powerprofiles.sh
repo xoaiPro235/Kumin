@@ -14,7 +14,7 @@ case "$current" in
     power-saver) option_save="$option_save  ●" ;;
 esac
 
-chosen=$(printf '%s\n' "$option_perf" "$option_bal" "$option_save" | rofi -dmenu -i -p "Power Profile ($current)")
+chosen=$(printf '%s\n' "$option_perf" "$option_bal" "$option_save" | rofi -dmenu -i -p "Power Profile")
 
 case "$chosen" in
     "$option_perf")

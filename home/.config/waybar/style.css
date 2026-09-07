@@ -20,29 +20,12 @@ window#waybar {
 #custom-weather,
 #pulseaudio,
 #clock,
-#backlight {
+#backlight,
+#network,
+#bluetooth {
     background: transparent;
     color: @accent_color;
     padding: 0 8px;
-}
-
-#window {
-    color: @accent_color;
-}
-#custom-weather {
-    color: @accent_color;
-}
-#pulseaudio {
-    color: @accent_color;
-}
-#battery {
-    color: @accent_color;
-}
-#clock {
-    color: @accent_color;
-}
-#backlight {
-    color: @accent_color;
 }
 
 tooltip {
@@ -54,4 +37,9 @@ tooltip {
 tooltip label {
     color: @accent_color;
     font-size: 16px;
+}
+
+#network,
+#bluetooth {
+    min-width: 20px;
 }

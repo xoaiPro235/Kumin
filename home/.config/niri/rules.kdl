@@ -30,6 +30,7 @@ window-rule {
     match app-id=r#"zed"#
     match app-id=r#"foot"#
     match app-id=r#"firefox"#
+    match app-id=r#"Alacritty"#
     opacity 0.8
 }
 

@@ -91,6 +91,24 @@ bright4=$(printf '%s' "$ACCENT_COLOR" | cut -c2-)
 regular5=$(printf '%s' "$ACCENT_COLOR" | cut -c2-)
 bright5=$(printf '%s' "$ACCENT_COLOR" | cut -c2-)"
 
+write_file "alacritty-style.toml" "# Generated - do not edit
+[font]
+size = ${FONT_SIZE}
+
+[font.normal]
+family = \"${FONT_FAMILY}\"
+
+[colors.primary]
+foreground = \"#cdd6f4\"
+
+[colors.normal]
+blue = \"${ACCENT_COLOR}\"
+magenta = \"${ACCENT_COLOR}\"
+
+[colors.bright]
+blue = \"${ACCENT_COLOR}\"
+magenta = \"${ACCENT_COLOR}\""
+
 echo "Generated theme state in: $STATE_DIR"
 
 # ===== Apply phase =====
@@ -117,6 +135,6 @@ if [ -f "$STATE_DIR/fonts.css" ] && [ -f "$SWAYLOCK_CONFIG" ]; then
     FONT_FAMILY=$(sed -nE 's/^\s*font-family:\s*"([^"]+)".*$/\1/p' "$STATE_DIR/fonts.css" | head -n1)
     FONT_SIZE=$(sed -nE 's/^\s*font-size:\s*([0-9]+)px.*$/\1/p' "$STATE_DIR/fonts.css" | head -n1)
     if [ -n "${FONT_FAMILY:-}" ] && [ -n "${FONT_SIZE:-}" ]; then
-        sed -i "s/^font=.*/font=${FONT_FAMILY} ${FONT_SIZE}/" "$SWAYLOCK_CONFIG"
+        sed --follow-symlinks -i "s/^font=.*/font=${FONT_FAMILY} ${FONT_SIZE}/" "$SWAYLOCK_CONFIG"
     fi
 fi

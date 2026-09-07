@@ -1,0 +1,19 @@
+[general]
+import = ["~/.local/state/kumin_theme/alacritty-style.toml"]
+
+[terminal]
+shell = { program = "fish" }
+
+[window]
+padding = { x = 20, y = 20 }
+opacity = 0.8
+
+[scrolling]
+history = 5000
+
+[cursor]
+unfocused_hollow = true
+style = { shape = "Beam", blinking = "Always" }
+
+[mouse]
+hide_when_typing = true
