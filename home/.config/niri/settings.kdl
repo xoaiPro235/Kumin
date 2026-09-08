@@ -27,6 +27,11 @@ cursor {
 
 layout {
     gaps 12
+
+    struts {
+        top -6
+    }
+
     center-focused-column "never"
     always-center-single-column
 
