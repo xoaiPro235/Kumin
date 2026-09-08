@@ -127,7 +127,18 @@ if command -v makoctl >/dev/null 2>&1; then
     makoctl reload 2>/dev/null || true
 fi
 
-pkill -SIGUSR2 waybar 2>/dev/null || true
+reload_waybar() {
+    if pgrep -x waybar >/dev/null 2>&1; then
+        pkill -SIGUSR2 waybar 2>/dev/null || true
+        sleep 0.5
+        if ! pgrep -x waybar >/dev/null 2>&1; then
+            waybar >/dev/null 2>&1 &
+        fi
+    else
+        waybar >/dev/null 2>&1 &
+    fi
+}
+reload_waybar
 pkill -USR1 foot 2>/dev/null || true
 
 SWAYLOCK_CONFIG="$HOME/.config/swaylock/config"
