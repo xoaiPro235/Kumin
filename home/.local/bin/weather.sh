@@ -53,14 +53,16 @@ if [ "$HOUR" -lt 6 ] || [ "$HOUR" -ge 18 ]; then
 fi
 
 # Extract current weather information
-TEMP=$(echo "$DATA" | jq -r '.current_condition[0].temp_C')
-CODE=$(echo "$DATA" | jq -r '.current_condition[0].weatherCode')
+TEMP=$(echo "$DATA" | jq -r '.current_condition[0].temp_C // "--"')
+CODE=$(echo "$DATA" | jq -r '.current_condition[0].weatherCode // ""')
 ICON=$(get_icon "$CODE" "$IS_NIGHT")
 
-# Extract current details for tooltip
+# Extract current details for tooltip with Pango markup escaping and fallbacks
 CURRENT_INFO=$(echo "$DATA" | jq -r '
-  "<b>Current:</b> \(.current_condition[0].weatherDesc[0].value) (\(.current_condition[0].temp_C)°C, Feels like: \(.current_condition[0].FeelsLikeC)°C)\n" +
-  " Wind: \(.current_condition[0].winddir16Point) \(.current_condition[0].windspeedKmph) km/h |  Humidity: \(.current_condition[0].humidity)%\n\n" +
+  .current_condition[0] as $c |
+  (($c.weatherDesc[0].value // "N/A") | gsub("&"; "&amp;") | gsub("<"; "&lt;") | gsub(">"; "&gt;")) as $desc |
+  "<b>Current:</b> \($desc) (\($c.temp_C // "--")°C, Feels like: \($c.FeelsLikeC // "--")°C)\n" +
+  " Wind: \($c.winddir16Point // "N/A") \($c.windspeedKmph // "--") km/h |  Humidity: \($c.humidity // "--")%\n\n" +
   "<b>Forecast:</b>"
 ')
 
@@ -68,10 +70,11 @@ CURRENT_INFO=$(echo "$DATA" | jq -r '
 FORECAST=""
 while read -r d_date d_min d_max d_code; do
     [ -n "$d_date" ] || continue
+    d_label=$(date -d "$d_date" "+%a (%d/%m)" 2>/dev/null || echo "$d_date")
     d_icon=$(get_icon "$d_code")
-    FORECAST="${FORECAST}\n• ${d_date}: ${d_icon}  ${d_min}°C - ${d_max}°C"
+    FORECAST="${FORECAST}\n• ${d_label}: ${d_icon}  ${d_min}°C - ${d_max}°C"
 done << EOF
-$(echo "$DATA" | jq -r '.weather[] | "\(.date) \(.mintempC) \(.maxtempC) \(.hourly[4].weatherCode // .hourly[0].weatherCode)"')
+$(echo "$DATA" | jq -r '.weather[] | "\(.date) \(.mintempC // "--") \(.maxtempC // "--") \(.hourly[4].weatherCode // .hourly[0].weatherCode // "")"')
 EOF
 
 TOOLTIP="${CURRENT_INFO}${FORECAST}"

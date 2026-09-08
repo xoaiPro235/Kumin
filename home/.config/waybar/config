@@ -154,7 +154,9 @@
     "tooltip": true,
     "interval": 900,
     "exec": "~/.local/bin/weather.sh",
-    "return-type": "json"
+    "return-type": "json",
+    "signal": 8,
+    "on-click-middle": "pkill -RTMIN+8 waybar"
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
