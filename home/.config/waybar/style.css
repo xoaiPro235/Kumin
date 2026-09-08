@@ -11,7 +11,7 @@ window#waybar {
     background: rgba(0, 0, 0, 0.4);
     color: @accent_color;
     border-radius: 12px;
-    margin: 6px 450px 0 450px;
+    margin: 0;
 }
 
 #window,
@@ -22,10 +22,20 @@ window#waybar {
 #clock,
 #backlight,
 #network,
-#bluetooth {
+#bluetooth,
+#mpris,
+#cava {
     background: transparent;
     color: @accent_color;
     padding: 0 8px;
+}
+
+#mpris.paused {
+    opacity: 0.6;
+}
+
+#cava {
+    padding-left: 2px;
 }
 
 tooltip {

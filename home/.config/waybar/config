@@ -2,52 +2,133 @@
   "layer": "top",
   "position": "top",
   "height": 24,
-
-  "margin-top": 0,
-  "margin-left": 450,
-  "margin-right": 450,
+  "margin-top": 6,
+  "margin-left": 160,
+  "margin-right": 160,
   "margin-bottom": 0,
-
   "reload_style_on_change": true,
-
-  "modules-left": ["niri/window"],
-  "modules-center": ["clock"],
-  "modules-right": ["custom/weather", "backlight", "pulseaudio", "network", "bluetooth", "battery", "tray"],
-
+  "modules-left": [
+    "niri/window",
+    "mpris"
+  ],
+  "modules-center": [
+    "custom/weather",
+    "clock"
+  ],
+  "modules-right": [
+    "cava",
+    "backlight",
+    "pulseaudio",
+    "network",
+    "bluetooth",
+    "battery",
+    "tray"
+  ],
+  "mpris": {
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "{status_icon} <i>{dynamic}</i>",
+    "player-icons": {
+      "default": "▶",
+      "mpv": "󰝚",
+      "spotify": "",
+      "firefox": "",
+      "chromium": ""
+    },
+    "status-icons": {
+      "paused": "⏸",
+      "playing": "▶",
+      "stopped": "⏹"
+    },
+    "dynamic-order": [
+      "title",
+      "artist"
+    ],
+    "dynamic-importance-order": [
+      "title"
+    ],
+    "dynamic-len": 24,
+    "title-len": 16,
+    "artist-len": 10,
+    "dynamic-separator": "•",
+    "ellipsis": "…",
+    "tooltip-format": "{player} ({status})\n{title} - {artist}\nAlbum: {album}"
+  },
+  "cava": {
+    "framerate": 24,
+    "autosens": 1,
+    "bars": 18,
+    "lower_cutoff_freq": 50,
+    "higher_cutoff_freq": 18000,
+    "method": "pipewire",
+    "source": "auto",
+    "stereo": true,
+    "reverse": false,
+    "bar_delimiter": 0,
+    "monstercat": false,
+    "waves": false,
+    "noise_reduction": 0.5,
+    "input_delay": 2,
+    "sleep_timer": 2,
+    "format-icons": [
+      " ",
+      "▁",
+      "▂",
+      "▃",
+      "▄",
+      "▅",
+      "▆",
+      "▇",
+      "█"
+    ],
+    "actions": {
+      "on-click-right": "mode"
+    }
+  },
   "niri/window": {
     "format": "{title}  ",
-    "max-length": 45,
+    "max-length": 30,
     "separate-outputs": false
   },
-
   "tray": {
     "icon-size": 14,
     "spacing": 8
   },
-
   "battery": {
     "interval": 10,
     "states": {
-        "warning": 30,
-        "critical": 15
+      "warning": 30,
+      "critical": 15
     },
     "format": "{icon} {capacity}%",
     "format-charging": "󰂄 {capacity}%",
     "format-plugged": "󰚥 {capacity}%",
-    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "format-icons": [
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ],
     "tooltip": true,
     "tooltip-format": "{capacity}% - {time}\nClick to change power profile",
     "on-click": "~/.local/bin/powerprofiles.sh"
   },
-
   "backlight": {
     "format": "{icon} {percent}%",
-    "format-icons": ["󱩌", "󱉕", "󱉓"],
+    "format-icons": [
+      "󱩌",
+      "󱉕",
+      "󱉓"
+    ],
     "tooltip": true,
     "on-scroll-up": "brightnessctl set 5%+",
     "on-scroll-down": "brightnessctl set 5%-"
   },
-
   "bluetooth": {
     "format": "",
     "format-disabled": "",
@@ -61,7 +142,6 @@
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_battery_percentage}%",
     "on-click-right": "foot -e bluetuith"
   },
-
   "network": {
     "format-wifi": "",
     "format-disconnected": "",
@@ -69,37 +149,37 @@
     "tooltip-format-disconnected": " Disconnected",
     "on-click-right": "foot -e nmtui"
   },
-
   "custom/weather": {
     "format": "󰖐 {}",
     "exec": "curl -s 'wttr.in/?format=%t' 2>/dev/null",
     "interval": 900
   },
-
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-muted": "",
-    "format-icons": ["", ""],
+    "format-icons": [
+      "",
+      ""
+    ],
     "on-click": "pavucontrol"
   },
-
   "clock": {
     "format": " {:%a, %b %d | %I:%M%p} ",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "calendar": {
-      "mode"          : "month",
-      "mode-mon-col"  : 3,
-      "weeks-pos"     : "right",
-      "on-scroll"     : 1,
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
       "format": {
-        "months":     "<b>{}</b>",
-        "days":       "<b>{}</b>",
-        "weeks":      "<b>W{}</b>",
-        "weekdays":   "<b>{}</b>",
-        "today":      "<b><u>{}</u></b>"
+        "months": "<b>{}</b>",
+        "days": "<b>{}</b>",
+        "weeks": "<b>W{}</b>",
+        "weekdays": "<b>{}</b>",
+        "today": "<b><u>{}</u></b>"
       }
     },
-    "actions":  {
+    "actions": {
       "on-click-right": "mode",
       "on-scroll-up": "shift_up",
       "on-scroll-down": "shift_down"
