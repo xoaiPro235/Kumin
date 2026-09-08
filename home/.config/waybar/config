@@ -150,9 +150,11 @@
     "on-click-right": "foot -e nmtui"
   },
   "custom/weather": {
-    "format": "󰖐 {}",
-    "exec": "curl -s 'wttr.in/?format=%t' 2>/dev/null",
-    "interval": 900
+    "format": "{}",
+    "tooltip": true,
+    "interval": 900,
+    "exec": "~/.local/bin/weather.sh",
+    "return-type": "json"
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
