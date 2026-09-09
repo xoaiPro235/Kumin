@@ -51,7 +51,8 @@
     "artist-len": 10,
     "dynamic-separator": "•",
     "ellipsis": "…",
-    "tooltip-format": "{player} ({status})\n{title} - {artist}\nAlbum: {album}"
+    "tooltip-format": "{player} ({status})\n{title} - {artist}\nAlbum: {album}",
+    "on-click-middle": "playerctl next"
   },
   "cava": {
     "framerate": 24,
